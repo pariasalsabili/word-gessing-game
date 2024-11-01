@@ -162,22 +162,27 @@ class WordGame {
 
     endRound() {
         clearInterval(this.timerInterval);
-
+    
         if (this.mistakes < this.getAllowedMistakes()) {
             this.currentPlayer.addCorrectWord(this.currentWord);
         } else {
             this.currentPlayer.addWrongWord(this.currentWord);
         }
-
+    
         this.currentPlayerIndex++;
-
+    
         if (this.currentPlayerIndex >= this.players.length) {
             this.currentPlayerIndex = 0;
             this.currentRound++;
         }
 
-        this.nextRound();
+        if (this.currentRound > this.rounds) {
+            this.endGame();
+        } else {
+            this.nextRound();
+        }
     }
+    
 
     startTimer(seconds) {
         this.timeLeft = seconds;
@@ -197,26 +202,29 @@ class WordGame {
     }
 
     endGame() {
+        clearInterval(this.timerInterval);
+    
         document.getElementById('game').style.display = 'none';
         document.getElementById('leaderboard').style.display = 'block';
-
+    
         const leaderboard = document.getElementById('leaderboardList');
         leaderboard.innerHTML = ''; 
-
+    
         this.players.forEach(player => {
             const li = document.createElement('li');
             li.textContent = `${player.name}: ${player.score} points`;
             leaderboard.appendChild(li);
-
+    
             const correctLi = document.createElement('li');
             correctLi.textContent = `${player.name} guessed correctly: ${player.correctWords.join(', ')}`;
             leaderboard.appendChild(correctLi);
-
+    
             const wrongLi = document.createElement('li');
             wrongLi.textContent = `${player.name} guessed incorrectly: ${player.wrongWords.join(', ')}`;
             leaderboard.appendChild(wrongLi);
         });
     }
+    
 
     restart_game() {
         this.currentRound = 1;
