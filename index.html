@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Guessing Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Word Guessing Game</h1>
+        
+        <div id="setup" class="card">
+            <h2>Setup</h2>
+            <div class="input-group">
+                <label for="number_player">Number of Players:</label>
+                <input type="number" id="number_player" min="1" max="2" value="1">
+            </div>
+            <div class="input-group">
+                <label for="number_round">Number of Rounds:</label>
+                <input type="number" id="number_round" min="1" max="10" value="3">
+            </div>
+            <div class="input-group">
+                <label for="difficulty">Choose Difficulty:</label>
+                <select id="difficulty">
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+            <button id="start_game" class="button">Start Game</button>
+        </div>
+
+        <div id="game" class="card" style="display: none;">
+            <h2>Player: <span id="currentPlayer"></span></h2>
+            <p id="category">Category: <span id="currentCategory"></span></p>
+            <div id="wordDisplay" class="word-display"></div>
+            <p>Mistakes: <span id="mistakesDisplay">0</span></p>
+            <div id="hintDisplay" class="hint-display"></div>>
+            <div id="keyboard" class="keyboard"></div>
+
+            <div id="shop" class="shop">
+                <h3>Shop</h3>
+                <button id="getTime" class="button">get Extra Time</button>
+                <button id="getLetter" class="button">Reveal a Letter</button>
+            </div>
+
+            <p id="guessedLetters"></p>
+            <button id="restart_game" class="button">Restart Game</button>
+        </div>
+        <div id="timer" style="display: none;">Time Left: <span id="timeLeft">60</span> seconds</div>
+        <div id="leaderboard" class="card" style="display: none;">
+            <h3>Leaderboard</h3>
+            <ul id="leaderboardList"></ul>
+            
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
